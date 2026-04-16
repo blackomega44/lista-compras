@@ -20,7 +20,6 @@
   --text:#1c1c1e;
   --muted:#8e8e93;
   --line:#e5e5ea;
-  --primary:#007aff;
   --green:#34c759;
   --red:#ff3b30;
   --shadow:0 6px 20px rgba(0,0,0,.05);
@@ -43,7 +42,6 @@ body{
   background:#ffffffcc;
   backdrop-filter:blur(20px);
   border-bottom:1px solid var(--line);
-  z-index:10;
 }
 
 .top-inner{
@@ -55,13 +53,11 @@ body{
 h1{
   margin:0;
   font-size:28px;
-  font-weight:700;
 }
 
 .sub{
   font-size:14px;
   color:var(--muted);
-  margin-top:4px;
 }
 
 .wrap{
@@ -75,14 +71,11 @@ h1{
   padding:14px;
   border-radius:16px;
   border:1px solid var(--line);
-  background:#fff;
-  font-size:16px;
   margin-bottom:16px;
 }
 
 .section-title{
   font-size:12px;
-  font-weight:600;
   color:var(--muted);
   margin:12px 4px;
   text-transform:uppercase;
@@ -92,23 +85,21 @@ h1{
   display:flex;
   align-items:center;
   gap:12px;
-  background:var(--card);
+  background:#fff;
   padding:14px;
-  border-radius:var(--radius);
+  border-radius:20px;
   margin-bottom:10px;
   box-shadow:var(--shadow);
 }
 
 .item-name{
   flex:1;
-  font-size:16px;
 }
 
 .qty, .extra-input{
   border-radius:12px;
   border:1px solid var(--line);
   padding:10px;
-  font-size:16px;
 }
 
 .qty{width:70px;}
@@ -136,25 +127,17 @@ button{
   padding:14px;
   border:none;
   border-radius:16px;
-  font-weight:600;
-  font-size:15px;
 }
 
 .btn-add{background:#e5e5ea;}
-.btn-save{background:var(--green);color:white;}
-.btn-clear{background:var(--red);color:white;}
+.btn-save{background:var(--green);color:#fff;}
+.btn-clear{background:var(--red);color:#fff;}
 
 .status{
   text-align:center;
   margin-top:8px;
   font-size:13px;
   color:var(--muted);
-}
-
-.empty{
-  text-align:center;
-  color:var(--muted);
-  padding:12px;
 }
 </style>
 </head>
@@ -164,7 +147,7 @@ button{
 <div class="top">
   <div class="top-inner">
     <h1>Lista de compras</h1>
-    <div class="sub">Simples, limpa e prática</div>
+    <div class="sub">Simples e organizada</div>
   </div>
 </div>
 
@@ -174,9 +157,8 @@ button{
   <div class="section-title">Itens</div>
   <div id="baseList"></div>
 
-  <div class="section-title">Adicionados</div>
+  <div class="section-title">Extras</div>
   <div id="extraList"></div>
-  <div id="extraEmpty" class="empty">Nenhum item.</div>
 </div>
 
 <div class="footer">
@@ -189,25 +171,40 @@ button{
 </div>
 
 <script>
-const items = ["Arroz","Feijão","Macarrão","Leite","Pão","Ovos","Açúcar","Café"];
+const items = [
+"Absorvente","Açúcar","Açúcar cristal","Álcool","Alho","Amaciante","Aveia fina","Azeite",
+"Arroz integral","Arroz parborizado","Batata","Bolacha","Bombril",
+"Café","Café descafeinado","Cândida","Cebola","Cif","Coco","Colgate","Colorau","Condicionador","Cotonete","Cremes de leite",
+"Detergente","Dove roll on",
+"Ervilha","Escova de dente","Esponja","Extrato",
+"Farinha de rosca","Farinha de trigo","Farinha integral","Feijão","Fermento granulado","Fermento Royal","Filtro 102","Fubá",
+"Gilletti",
+"Harpic",
+"Insulfilm",
+"Leite de coco","Leite desnatado e integral","Leite em pó","Leite condensado","Limão","Luva",
+"Macarrão","Maionese","Maisena","Margarina sem sal","Milho","Molho",
+"Omo","Óleo","Ovos",
+"Pão de forma","Papel alumínio","Papel manteiga","Papel higiênico cachorras","Papel toalha",
+"Queijo ralado",
+"Sabão em pedra","Sabonete e Nívea","Sal","Salsinha","Saco de lixo 30 e 100","Shampoo",
+"Tomate","Tinta","Trigo",
+"Veja","Vinagre","Vanish"
+];
 
 function renderBase(){
-  let html="";
-  items.forEach(item=>{
-    html+=`
+  baseList.innerHTML = items.map(item => `
     <div class="item">
       <div class="item-name">${item}</div>
       <select class="qty">
         <option>-</option>
-        ${[1,2,3,4,5].map(n=>`<option>${n}</option>`).join("")}
+        ${[1,2,3,4,5,6,7,8,9,10].map(n=>`<option>${n}</option>`).join("")}
       </select>
-    </div>`;
-  });
-  baseList.innerHTML=html;
+    </div>
+  `).join("");
 }
 
 function addItem(){
-  extraList.innerHTML+=`
+  extraList.innerHTML += `
   <div class="item">
     <input class="extra-input" placeholder="Novo item">
     <select class="qty">
